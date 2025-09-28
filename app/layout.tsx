@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -33,6 +35,7 @@ export default function RootLayout({
         className={`${spaceGrotesk.variable} antialiased`}
       >
         {children}
+        <ToastContainer />
       </body>
     </html>
   );

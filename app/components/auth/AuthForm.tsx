@@ -9,6 +9,8 @@ import axios from "axios";
 import api from "@/app/lib/api";
 import { UserFormData } from "@/types";
 import { registerUser } from "@/api/authApi";
+import { toast } from "react-toastify";
+"react-toastify";
 const CountrySelect = dynamic(() => import("../CountrySelect"), { ssr: false });
 
 
@@ -30,10 +32,10 @@ export default function AuthForm({ title, subtitle, view }: AuthFormProps) {
     } else {
       const result = await registerUser(data);
       if(result.message){
-        alert(result.message);
+        toast.success(result.message);
       }
       if(result.error){
-        alert(result.error);
+        toast.error(result.error);
       }
     }
   };
