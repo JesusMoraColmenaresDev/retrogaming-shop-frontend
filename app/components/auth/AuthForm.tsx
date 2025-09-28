@@ -1,9 +1,11 @@
 "use client";
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import DynamicInput from "./dynamic/DynamicInput";
-import DynamicButton from "./dynamic/DynamicButton";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import DynamicInput from "../dynamic/DynamicInput";
+import DynamicButton from "../dynamic/DynamicButton";
 import { Lock, Mail, User, UserRound, Phone, Globe, ShieldCheck } from "lucide-react";
+import dynamic from "next/dynamic";
+const CountrySelect = dynamic(() => import("../CountrySelect"), { ssr: false });
 
 
 type ViewType = "login" | "register";
@@ -25,7 +27,7 @@ interface FormData {
 }
 
 export default function AuthForm({ title, subtitle, view }: AuthFormProps) {
-  const { register, handleSubmit } = useForm<FormData>();
+  const { register, control, handleSubmit, formState: { errors } } = useForm<FormData>();
   const isRegister = view === "register";
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
@@ -47,18 +49,24 @@ export default function AuthForm({ title, subtitle, view }: AuthFormProps) {
 
       {isRegister && (
         <>
-          <DynamicInput name="firstName" placeholder="Nombre" type="text" register={register} icon={<User />} />
-          <DynamicInput name="lastName" placeholder="Apellido" type="text" register={register} icon={<UserRound />} />
-          <DynamicInput name="phoneNumber" placeholder="Número de teléfono" type="tel" register={register} icon={<Phone />} />
+          <DynamicInput name="firstName" placeholder="Nombre" type="text" register={register} icon={<User />} error={errors.firstName} />
+          <DynamicInput name="lastName" placeholder="Apellido" type="text" register={register} icon={<UserRound />} error={errors.lastName} />
+          <DynamicInput name="phoneNumber" placeholder="Número de teléfono" type="tel" register={register} icon={<Phone />} error={errors.phoneNumber} />
         </>
       )}
-      <DynamicInput name="email" placeholder="Correo electrónico" type="email" register={register} icon={<Mail />} />
+      <DynamicInput name="email" placeholder="Correo electrónico" type="email" register={register} icon={<Mail />} error={errors.email} />
       {isRegister && (
-        <DynamicInput name="country" placeholder="País" type="text" register={register} icon={<Globe />} />
-      )}
-      <DynamicInput name="password" placeholder="Contraseña" type="password" register={register} icon={<Lock />} />
+        <Controller
+          name="country"
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <CountrySelect value={field.value} onChange={field.onChange} error={errors.country} />
+          )}
+        />)}
+      <DynamicInput name="password" placeholder="Contraseña" type="password" register={register} icon={<Lock />} error={errors.password} />
       {isRegister && (
-        <DynamicInput name="confirmPassword" placeholder="Confirmar contraseña" type="password" register={register} icon={<ShieldCheck />} />
+        <DynamicInput name="confirmPassword" placeholder="Confirmar contraseña" type="password" register={register} icon={<ShieldCheck />} error={errors.confirmPassword} />
       )}
 
       <DynamicButton
