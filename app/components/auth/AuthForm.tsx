@@ -5,6 +5,10 @@ import DynamicInput from "../dynamic/DynamicInput";
 import DynamicButton from "../dynamic/DynamicButton";
 import { Lock, Mail, User, UserRound, Phone, Globe, ShieldCheck } from "lucide-react";
 import dynamic from "next/dynamic";
+import axios from "axios";
+import api from "@/app/lib/api";
+import { UserFormData } from "@/types";
+import { registerUser } from "@/api/authApi";
 const CountrySelect = dynamic(() => import("../CountrySelect"), { ssr: false });
 
 
@@ -16,25 +20,21 @@ interface AuthFormProps {
   view: ViewType;
 }
 
-interface FormData {
-  email: string;
-  password: string;
-  confirmPassword?: string;
-  firstName?: string;
-  lastName?: string;
-  phoneNumber?: string;
-  country?: string;
-}
-
 export default function AuthForm({ title, subtitle, view }: AuthFormProps) {
-  const { register, control, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const { register, control, handleSubmit, formState: { errors } } = useForm<UserFormData>();
   const isRegister = view === "register";
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<UserFormData> = async (data) => {
     if (view === "login") {
       console.log("Login:", data);
     } else {
-      console.log("Register:", data);
+      const result = await registerUser(data);
+      if(result.message){
+        alert(result.message);
+      }
+      if(result.error){
+        alert(result.error);
+      }
     }
   };
 
