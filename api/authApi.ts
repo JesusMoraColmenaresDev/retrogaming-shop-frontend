@@ -19,7 +19,7 @@ export async function loginUser(data: UserFormData) {
         return response.data.token
     } catch (error: any) {
         //esto es debido a que los errores de validacion de express vienen en un formato de arreglo 
-        // mientras que el de la verificacion de email viene en un solo objeto error
+        // mientras que el de la verificacion de si el usuario existe o si la contraseña coincide, viene en un solo objeto error
         return { error: getApiErrorMessage(error) };
 
     }
