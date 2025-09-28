@@ -8,7 +8,7 @@ import dynamic from "next/dynamic";
 import axios from "axios";
 import api from "@/app/lib/api";
 import { UserFormData } from "@/types";
-import { registerUser } from "@/api/authApi";
+import { loginUser, registerUser } from "@/api/authApi";
 import { toast } from "react-toastify";
 "react-toastify";
 const CountrySelect = dynamic(() => import("../CountrySelect"), { ssr: false });
@@ -27,15 +27,20 @@ export default function AuthForm({ title, subtitle, view }: AuthFormProps) {
   const isRegister = view === "register";
 
   const onSubmit: SubmitHandler<UserFormData> = async (data) => {
-    if (view === "login") {
-      console.log("Login:", data);
-    } else {
-      const result = await registerUser(data);
-      if(result.message){
-        toast.success(result.message);
+    if (!isRegister) {
+      const token = await loginUser(data)
+      if (token.error) {
+        toast.error(token.error);
+      } else {
+        toast.success("Inicio de sesion exitoso");
+        localStorage.setItem('token', token);
       }
-      if(result.error){
-        toast.error(result.error);
+    } else {
+      const response = await registerUser(data);
+      if (response.error) {
+        toast.error(response.error);
+      } else {
+        toast.success(response.message);
       }
     }
   };
