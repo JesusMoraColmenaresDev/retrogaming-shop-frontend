@@ -5,8 +5,6 @@ import DynamicInput from "../dynamic/DynamicInput";
 import DynamicButton from "../dynamic/DynamicButton";
 import { Lock, Mail, User, UserRound, Phone, Globe, ShieldCheck } from "lucide-react";
 import dynamic from "next/dynamic";
-import axios from "axios";
-import api from "@/app/lib/api";
 import { UserFormData } from "@/types";
 import { loginUser, registerUser } from "@/api/authApi";
 import { toast } from "react-toastify";
