@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 import { UserFormData } from "@/types";
 import { loginUser, registerUser } from "@/api/authApi";
 import { toast } from "react-toastify";
-import { useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
 "react-toastify";
 const CountrySelect = dynamic(() => import("../CountrySelect"), { ssr: false });
 
@@ -27,23 +27,23 @@ export default function AuthForm({ title, subtitle, view }: AuthFormProps) {
   const { t } = useTranslation("common");
   const isRegister = view === "register";
 
+
   const onSubmit: SubmitHandler<UserFormData> = async (data) => {
     if (!isRegister) {
-      const {code, token, error} = await loginUser(data)
-     
+      const { code, token, error } = await loginUser(data)
       if (error) {
         toast.error(t(error))
       } else {
         toast.success(t(code));
         localStorage.setItem('token', token);
-      } 
+      }
     } else {
-      const response = await registerUser(data);
-      /*if (response.error) {
-        toast.error(response.error);
+      const { code, error } = await registerUser(data);
+      if (error) {
+        toast.error(t(error));
       } else {
-        toast.success(response.message);
-      }*/
+        toast.success(code);
+      }
     }
   };
 

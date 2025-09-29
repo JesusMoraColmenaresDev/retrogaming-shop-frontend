@@ -3,8 +3,6 @@
 	"loginSubtitle": "Introduce tus credenciales",
 	"register": "Registrarse",
 	"registerSubtitle": "Introduce tu información",
-	"loginSuccess": "Inicio de sesión exitoso",
-	"registerSuccess": "Registro exitoso",
 	"FIRST_NAME_REQUIRED": "El nombre es obligatorio.",
 	"LAST_NAME_REQUIRED": "El apellido es obligatorio.",
 	"EMAIL_INVALID": "Correo electrónico inválido.",
@@ -20,5 +18,6 @@
 	"INVALID_CREDENTIALS": "Correo electrónico o contraseña inválidos.",
 	"LOGIN_SUCCESSFUL": "Inicio de sesión exitoso.",
 	"LOGIN_ERROR": "Error al iniciar sesión.",
+	"AUTH_REQUIRED": "Se requiere que inicies sesión para ver esta página.",
 	"UNKNOWN_ERROR": "Error desconocido."
 }

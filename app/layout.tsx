@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthGuard from "./AuthGuard";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -34,8 +35,9 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} antialiased`}
       >
-        {children}
-        <ToastContainer />
+        <AuthGuard>
+          {children}
+        </AuthGuard>
       </body>
     </html>
   );

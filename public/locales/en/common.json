@@ -20,5 +20,6 @@
     "INVALID_CREDENTIALS": "Invalid email or password.",
     "LOGIN_SUCCESSFUL": "Login successful.",
     "LOGIN_ERROR": "Login error.",
+    "AUTH_REQUIRED": "Authentication is required to view this page.",
     "UNKNOWN_ERROR": "Unknown error."
 }
