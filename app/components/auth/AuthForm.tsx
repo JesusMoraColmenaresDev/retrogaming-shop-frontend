@@ -1,4 +1,5 @@
 "use client";
+import "../../i18n";
 import React from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import DynamicInput from "../dynamic/DynamicInput";
@@ -8,6 +9,7 @@ import dynamic from "next/dynamic";
 import { UserFormData } from "@/types";
 import { loginUser, registerUser } from "@/api/authApi";
 import { toast } from "react-toastify";
+import { useTranslation} from "next-i18next";
 "react-toastify";
 const CountrySelect = dynamic(() => import("../CountrySelect"), { ssr: false });
 
@@ -22,24 +24,26 @@ interface AuthFormProps {
 
 export default function AuthForm({ title, subtitle, view }: AuthFormProps) {
   const { register, control, handleSubmit, formState: { errors } } = useForm<UserFormData>();
+  const { t } = useTranslation("common");
   const isRegister = view === "register";
 
   const onSubmit: SubmitHandler<UserFormData> = async (data) => {
     if (!isRegister) {
-      const token = await loginUser(data)
-      if (token.error) {
-        toast.error(token.error);
+      const {code, token, error} = await loginUser(data)
+     
+      if (error) {
+        toast.error(t(error))
       } else {
-        toast.success("Inicio de sesion exitoso");
+        toast.success(t(code));
         localStorage.setItem('token', token);
-      }
+      } 
     } else {
       const response = await registerUser(data);
-      if (response.error) {
+      /*if (response.error) {
         toast.error(response.error);
       } else {
         toast.success(response.message);
-      }
+      }*/
     }
   };
 

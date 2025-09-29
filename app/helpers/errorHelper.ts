@@ -1,8 +1,10 @@
-export function getApiErrorMessage(error: any): string {
+export function getApiErrorCode(error: any): string {
   if (error?.response?.data?.errors) {
-    return error.response.data.errors[0].msg;
-  } else if (error?.response?.data?.error) {
-    return error.response.data.error;
+    // express-validator: cada error tiene un campo 'code'
+    return error.response.data.errors[0].code;
+  } else if (error?.response?.data?.code) {
+    // errores personalizados: el campo es 'code'
+    return error.response.data.code;
   }
-  return "Error desconocido";
+  return "UNKNOWN_ERROR";
 }
