@@ -8,6 +8,7 @@ interface DynamicInputProps {
   register: UseFormRegister<any>;
   icon?: React.ReactNode;
   error?: any;
+  className?: string;
 }
 
 export default function DynamicInput({
@@ -17,9 +18,10 @@ export default function DynamicInput({
   register,
   error,
   icon,
+  className,
 }: DynamicInputProps) {
   return (
-    <div className="flex flex-col gap-1 mb-4 w-full">
+    <div className={`flex flex-col gap-1 w-full ${className || ""}`}>
       <div className="flex items-center gap-2">
         {icon && <span className="text-gray-500">{icon}</span>}
         <div className="flex flex-col">
@@ -35,10 +37,7 @@ export default function DynamicInput({
             </span>
           )}
         </div>
-
       </div>
-
     </div>
-
   );
 }
