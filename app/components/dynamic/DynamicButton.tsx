@@ -16,7 +16,7 @@ export default function DynamicButton({
   return (
     <button
       type={type}
-      className={`w-full py-2 mt-4 bg-[#7f13ec] text-white rounded font-semibold hover:bg-opacity-80 transition ${className || ""}`}
+      className={`w-full py-2 bg-[#7f13ec] text-white rounded font-semibold hover:bg-[#7f13ec90] transition ${className || ""}`}
       onClick={onClick}
     >
       {text}

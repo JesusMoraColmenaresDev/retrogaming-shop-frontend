@@ -24,25 +24,25 @@ export default function GamesPage() {
             imageUrl="/retro-gaming-setup-stockcake.jpg"
             title="Game Title"
             subtitle="Game Description"
-            button={<DynamicButton text="Ver juego" type="button" onClick={() => router.push('/games')} className="px-8" />}
+            button={<DynamicButton text="Ver mas" type="button" onClick={() => router.push('/games')} className="px-8" />}
           />
           <DynamicItemCard
             imageUrl="/retro-gaming-setup-stockcake.jpg"
             title="Game Title"
             subtitle="Game Description"
-            button={<DynamicButton text="Ver juego" type="button" onClick={() => router.push('/games')} className="px-8" />}
+            button={<DynamicButton text="Ver más" type="button" onClick={() => router.push('/games')} className="px-8" />}
           />
           <DynamicItemCard
             imageUrl="/retro-gaming-setup-stockcake.jpg"
             title="Game Title"
             subtitle="Game Description"
-            button={<DynamicButton text="Ver juego" type="button" onClick={() => router.push('/games')} className="px-8" />}
+            button={<DynamicButton text="Ver más" type="button" onClick={() => router.push('/games')} className="px-8" />}
           />
           <DynamicItemCard
             imageUrl="/retro-gaming-setup-stockcake.jpg"
             title="Game Title"
             subtitle="Game Description"
-            button={<DynamicButton text='Ver juego' type='button' onClick={() => router.push('/consoles')} className='px-8' ></DynamicButton>}
+            button={<DynamicButton text='Ver más' type='button' onClick={() => router.push('/consoles')} className='px-8' ></DynamicButton>}
           />
         </div>
       </section>
