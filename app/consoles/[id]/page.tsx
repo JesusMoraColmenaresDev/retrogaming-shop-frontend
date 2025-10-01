@@ -3,7 +3,7 @@ import DynamicElementDetails from '@/app/components/dynamic/DynamicElementDetail
 import DynamicSpecItem from '@/app/components/dynamic/DynamicSpecItem';
 import React from 'react'
 
-export default function page() {
+export default function ConsoleDetailPage() {
     return (
         <DynamicElementDetails
             title="Nombre de la consola"

@@ -1,14 +1,27 @@
 "use client";
-import React, { use } from 'react'
+import React, { use, useEffect } from 'react'
 
 import { useRouter } from 'next/navigation';
 import DynamicItemCard from '../components/dynamic/DynamicItemCard';
 import DynamicButton from '../components/dynamic/DynamicButton';
 import DynamicSelect from '../components/dynamic/DynamicSelect';
 import DynamicPagination from '../components/dynamic/DynamicPagination';
+import api from '../lib/api';
+
+
 
 export default function GamesPage() {
   const router = useRouter();
+
+  useEffect(() => {
+    const getAllGames = async () => {
+      const games = await api.get('/games');
+      console.log(games);
+    }
+
+    getAllGames();
+  }, []);
+
   return (
     <main>
       <section className="my-20 flex flex-col gap-8 items-center justify-center">
