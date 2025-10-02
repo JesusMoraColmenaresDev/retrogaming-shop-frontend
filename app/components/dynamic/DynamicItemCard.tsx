@@ -23,10 +23,10 @@ export default function DynamicItemCard({
             <div className="relative w-full h-[200px]">
                 <Image src={imageUrl} fill alt={title} className="object-cover rounded-t-2xl" sizes="400px" />
             </div>
-            <div className=" px-4 flex flex-col gap-2">
+            <div className=" px-4 flex flex-col gap-4">
                 <p className="text-white text-xl font-semibold">{title}</p>
-                {subtitle && <p className="text-gray-400 text-lg">{subtitle}</p>}
-                {subtitle2 && <p className="text-gray-400 text-base">{subtitle2}</p>}
+                {subtitle && <p className="text-gray-400 text-lg h-8">{subtitle}</p>}
+                {subtitle2 && <p className="text-gray-400 text-base h-8">{subtitle2}</p>}
                 {button && <div className="mt-2">{button}</div>}
             </div>
         </div>

@@ -1,26 +1,29 @@
 "use client";
-import React, { use, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation';
 import DynamicItemCard from '../components/dynamic/DynamicItemCard';
 import DynamicButton from '../components/dynamic/DynamicButton';
 import DynamicSelect from '../components/dynamic/DynamicSelect';
 import DynamicPagination from '../components/dynamic/DynamicPagination';
-import api from '../lib/api';
-
-
+import { getAllGames } from '@/api/gamesApi';
+import { Game, GamesPaginatedResponse } from '@/types/games';
 
 export default function GamesPage() {
   const router = useRouter();
+  const [games, setGames] = useState<Game[]>([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    const getAllGames = async () => {
-      const games = await api.get('/games');
-      console.log(games);
-    }
+    const fetchAllGames = async () => {
+      const response: GamesPaginatedResponse = await getAllGames(page);
+      setGames(response.games);
+      setTotalPages(response.totalPages);
+    };
 
-    getAllGames();
-  }, []);
+    fetchAllGames();
+  }, [page]);
 
   return (
     <main>
@@ -33,35 +36,20 @@ export default function GamesPage() {
           <DynamicSelect options={['Opción 1', 'Opción 2']} defaultOption="Año" onChange={(value) => console.log(value)} name="gameSelect" />
         </div>
         <div className="flex gap-8 w-full justify-center">
-          <DynamicItemCard
-            imageUrl="/retro-gaming-setup-stockcake.jpg"
-            title="Game Title"
-            subtitle="Game Description"
-            button={<DynamicButton text="Ver mas" type="button" onClick={() => router.push('/games')} className="px-8" />}
-          />
-          <DynamicItemCard
-            imageUrl="/retro-gaming-setup-stockcake.jpg"
-            title="Game Title"
-            subtitle="Game Description"
-            button={<DynamicButton text="Ver más" type="button" onClick={() => router.push('/games')} className="px-8" />}
-          />
-          <DynamicItemCard
-            imageUrl="/retro-gaming-setup-stockcake.jpg"
-            title="Game Title"
-            subtitle="Game Description"
-            button={<DynamicButton text="Ver más" type="button" onClick={() => router.push('/games')} className="px-8" />}
-          />
-          <DynamicItemCard
-            imageUrl="/retro-gaming-setup-stockcake.jpg"
-            title="Game Title"
-            subtitle="Game Description"
-            button={<DynamicButton text='Ver más' type='button' onClick={() => router.push('/consoles')} className='px-8' ></DynamicButton>}
-          />
+          {games.map((game) => (
+            <DynamicItemCard
+              key={game.id}
+              imageUrl="/retro-gaming-setup-stockcake.jpg"
+              title={game.name}
+              subtitle2={game.description}
+              button={<DynamicButton text="Ver más" type="button" onClick={() => router.push(`/games/${game.id}`)} className="px-8" />}
+            />
+          ))}
         </div>
       </section>
 
       <section className='my-20 flex items-center justify-center w-full'>
-        <DynamicPagination pagesTotal={10} />
+        <DynamicPagination page={page} pagesTotal={totalPages} onChangePage={setPage} />
       </section>
 
    
