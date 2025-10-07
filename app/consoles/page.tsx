@@ -16,7 +16,7 @@ export default function ConsolesPage() {
 
   useEffect(() => {
     const fetchAllConsoles = async () => {
-      const response: ConsolesPaginatedResponse = await getAllConsoles(page);
+      const response = await getAllConsoles(page);
       setConsoles(response.consoles);
       setTotalPages(response.totalPages);
     };
@@ -29,9 +29,9 @@ export default function ConsolesPage() {
         <h2 className="text-white text-3xl font-bold">Catálogo de consolas</h2>
         <h3 className="text-gray-400 text-xl">Explora nuestra amplia selección de consolas retro</h3>
         <div className='flex gap-4'>
-          <DynamicSelect options={['Opción 1', 'Opción 2']} defaultOption="Marca" onChange={(value) => console.log(value)} name="consoleBrand" />
+          {/**<DynamicSelect resource='' defaultOption="Marca" onChange={(value) => console.log(value)} name="consoleBrand" />
           <DynamicSelect options={['Opción 1', 'Opción 2']} defaultOption="Tipo" onChange={(value) => console.log(value)} name="consoleType" />
-          <DynamicSelect options={['Opción 1', 'Opción 2']} defaultOption="Año" onChange={(value) => console.log(value)} name="consoleYear" />
+          <DynamicSelect options={['Opción 1', 'Opción 2']} defaultOption="Año" onChange={(value) => console.log(value)} name="consoleYear" />*/}
         </div>
         <div className="flex gap-8 w-full justify-center">
           {consoles.map((console) => (

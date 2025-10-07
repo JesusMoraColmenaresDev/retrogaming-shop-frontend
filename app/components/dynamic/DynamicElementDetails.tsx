@@ -13,7 +13,7 @@ interface DynamicElementDetailsProps {
     images: string[]; // 3 urls
     description: string;
     specs: ReactNode; // ahora acepta los componentes directamente
-    price: string;
+    price: number;
 }
 
 export default function DynamicElementDetails({
@@ -46,7 +46,7 @@ export default function DynamicElementDetails({
     return (
         <div className='w-full flex items-center justify-center'>
             <div className='max-w-[60vw] mt-20'>
-                <h2 className="text-4xl text-gray-100 font-bold mb-8">{title}</h2>
+                <h2 className="text-4xl text-[#7f13ec] font-bold mb-8">{title}</h2>
                 <div className='flex flex-col gap-2'>
                     <div className='flex w-full'>
                         <ImageList

@@ -24,7 +24,7 @@ export default function DynamicItemCard({
                 <Image src={imageUrl} fill alt={title} className="object-cover rounded-t-2xl" sizes="400px" />
             </div>
             <div className=" px-4 flex flex-col gap-4">
-                <p className="text-white text-xl font-semibold">{title}</p>
+                <p className="text-white text-xl font-semibold h-8 truncate">{title}</p>
                 {subtitle && <p className="text-gray-400 text-lg h-8">{subtitle}</p>}
                 {subtitle2 && <p className="text-gray-400 text-base h-8">{subtitle2}</p>}
                 {button && <div className="mt-2">{button}</div>}

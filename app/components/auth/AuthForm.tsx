@@ -42,7 +42,7 @@ export default function AuthForm({ title, subtitle, view }: AuthFormProps) {
       if (error) {
         toast.error(t(error));
       } else {
-        toast.success(code);
+        toast.success(t(code));
       }
     }
   };

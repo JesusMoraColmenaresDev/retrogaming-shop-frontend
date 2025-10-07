@@ -1,9 +1,18 @@
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import api from '@/app/lib/api';
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+
+interface Option {
+    id: string | number;
+    name: string;
+}
 
 interface DynamicSelectProps {
-    options: string[];
+    resource?: string;  // Ej: "genres", "platforms", "manufacturers"
     onChange: (value: string) => void;
     name: string;
     className?: string;
@@ -11,7 +20,7 @@ interface DynamicSelectProps {
 }
 
 export default function DynamicSelect({
-    options,
+    resource,
     onChange,
     name,
     className,
@@ -20,9 +29,29 @@ export default function DynamicSelect({
 
     // El valor inicial es string vacío para mostrar el placeholder
     const [value, setValue] = useState("");
+    const [dynamicOptions, setDynamicOptions] = useState<Option[]>([]);
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        if (resource) {
+            const fetchOptions = async () => {
+                const res = await api.get(`/${resource}`);
+                setDynamicOptions(res.data);
+            };
+            fetchOptions();
+        }
+    }, [resource]);
+
     const handleChange = (event: SelectChangeEvent) => {
-        setValue(event.target.value);
-        onChange(event.target.value);
+        const newValue = event.target.value;
+        setValue(newValue);
+        onChange(newValue);
+
+        // Actualiza los query params en la URL
+        const params = new URLSearchParams(searchParams.toString());
+        params.set(name, newValue);
+        router.push(`?${params.toString()}`);
     };
 
     return (
@@ -42,7 +71,7 @@ export default function DynamicSelect({
                         color: '#d1d5db',
                         borderRadius: 2,
                         mt: 1,
-                        border: '1px solid #4b5563', 
+                        border: '1px solid #4b5563',
                         '& .MuiMenuItem-root:hover': {
                             backgroundColor: '#7F13EC',
                             color: 'white',
@@ -85,9 +114,9 @@ export default function DynamicSelect({
             <MenuItem value="" disabled hidden>
                 {defaultOption || "Selecciona una opción"}
             </MenuItem>
-            {options.map((option, idx) => (
-                <MenuItem key={idx} value={option}>
-                    {option}
+            {dynamicOptions.map((option, idx) => (
+                <MenuItem key={idx} value={option.id}>
+                    {option.name}
                 </MenuItem>
             ))}
         </Select>

@@ -17,7 +17,7 @@ export default function GamesPage() {
 
   useEffect(() => {
     const fetchAllGames = async () => {
-      const response: GamesPaginatedResponse = await getAllGames(page);
+      const response = await getAllGames(page);
       setGames(response.games);
       setTotalPages(response.totalPages);
     };
@@ -31,9 +31,8 @@ export default function GamesPage() {
         <h2 className="text-white text-3xl font-bold">Catalogo de juegos</h2>
         <h3 className="text-gray-400 text-xl">Explora nuestra amplia selección de juegos retro</h3>
         <div className='flex gap-4'>
-          <DynamicSelect options={['Opción 1', 'Opción 2']} defaultOption="Plataforma" onChange={(value) => console.log(value)} name="gameSelect" />
-          <DynamicSelect options={['Opción 1', 'Opción 2']} defaultOption="Genero" onChange={(value) => console.log(value)} name="gameSelect" />
-          <DynamicSelect options={['Opción 1', 'Opción 2']} defaultOption="Año" onChange={(value) => console.log(value)} name="gameSelect" />
+          <DynamicSelect resource='platforms' defaultOption="Plataforma" onChange={(value) => console.log(value)} name="platform" />
+          <DynamicSelect resource='genres' defaultOption="Genero" onChange={(value) => console.log(value)} name="genre" />
         </div>
         <div className="flex gap-8 w-full justify-center">
           {games.map((game) => (

@@ -19,7 +19,7 @@ export default function ConsoleDetailPage() {
                     <DynamicSpecItem label="Fabricante" value="Nintendo" />
                     <DynamicSpecItem label="Existencias" value="1" />
                 </>}
-            price="$9999"
+            price={999}
         />
     );
 }
