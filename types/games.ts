@@ -1,14 +1,7 @@
+
 import { z } from 'zod';
-
-export const PlatformSchema = z.object({
-	id: z.number(),
-	name: z.string(),
-});
-
-export const GenreSchema = z.object({
-	id: z.number(),
-	name: z.string(),
-});
+import { PlatformSchema } from './platform';
+import { GenreSchema } from './genre';
 
 export const GameSchema = z.object({
 	id: z.number(),

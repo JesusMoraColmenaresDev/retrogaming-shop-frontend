@@ -46,7 +46,7 @@ export default function DynamicElementDetails({
     return (
         <div className='w-full flex items-center justify-center'>
             <div className='max-w-[60vw] mt-20'>
-                <h2 className="text-4xl text-[#7f13ec] font-bold mb-8">{title}</h2>
+                <h2 className="text-6xl text-gray-100 font-bold mb-8">{title}</h2>
                 <div className='flex flex-col gap-2'>
                     <div className='flex w-full'>
                         <ImageList
@@ -78,20 +78,19 @@ export default function DynamicElementDetails({
                                 <p className="text-gray-400">{description}</p>
                             </div>
 
-                            <div className='flex flex-col gap-4 pt-5'>
-                                <div className="px-4">
-                                    <p className="text-2xl text-gray-100 border-b-1 border-[#7F13EC80] font-bold pb-2 mb-6">Especificaciones</p>
-                                    <div className="flex justify-between">
-                                        {specs}
-                                    </div>
+
+                            <div className="px-4 pt-5">
+                                <p className="text-2xl text-gray-100 border-b-1 border-[#7F13EC80] font-bold pb-2 mb-6">Especificaciones</p>
+                                <div className="flex justify-between gap-4">
+                                    {specs}
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
-                    <div className='flex items-center justify-end gap-6 px-4'>
+                    <div className='flex items-center justify-end gap-6 px-4 pt-8'>
                         <div>
-                            <span className='font-bold text-gray-600 text-sm'>Precio</span>
                             <p className='font-bold text-gray-100 text-2xl'>{price}</p>
                         </div>
                         <DynamicButton text='Agregar al carrito' type='button' className='max-w-fit px-4' />

@@ -1,12 +1,6 @@
+
 import { z } from 'zod';
-
-
-export const ManufacturerSchema = z.object({
-	id: z.number(),
-	name: z.string(),
-	createdAt: z.string(),
-	updatedAt: z.string(),
-});
+import { ManufacturerSchema} from './manufacturer';
 
 export const ConsoleSchema = z.object({
 	id: z.number(),

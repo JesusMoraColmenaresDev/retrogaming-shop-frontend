@@ -17,3 +17,9 @@ export interface CurrentUserData {
   country?: string;
   role: 'user' | 'admin';
 };
+
+
+export interface Filter {
+  filter: string;
+  value: string;
+}

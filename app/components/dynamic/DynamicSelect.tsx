@@ -12,7 +12,7 @@ interface Option {
 }
 
 interface DynamicSelectProps {
-    resource?: string;  // Ej: "genres", "platforms", "manufacturers"
+    endpoint?: string;  // Ej: "genres", "platforms", "manufacturers" 
     onChange: (value: string) => void;
     name: string;
     className?: string;
@@ -20,7 +20,7 @@ interface DynamicSelectProps {
 }
 
 export default function DynamicSelect({
-    resource,
+    endpoint,
     onChange,
     name,
     className,
@@ -34,14 +34,14 @@ export default function DynamicSelect({
     const searchParams = useSearchParams();
 
     useEffect(() => {
-        if (resource) {
+        if (endpoint) {
             const fetchOptions = async () => {
-                const res = await api.get(`/${resource}`);
+                const res = await api.get(`/${endpoint}`);
                 setDynamicOptions(res.data);
             };
             fetchOptions();
         }
-    }, [resource]);
+    }, [endpoint]);
 
     const handleChange = (event: SelectChangeEvent) => {
         const newValue = event.target.value;
